@@ -1,6 +1,39 @@
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url(../css/fonts/GothamPro-Black.woff) format("woff");
+    font-weight: 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url(../css/fonts/GothamPro.woff) format("woff");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url(../css/fonts/GothamPro-Medium.woff) format("woff");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'e-UkraineHead';
+    src: url(../css/fonts/e-UkraineHead-Bold.woff) format("woff");
+    font-weight: 700;
+    font-display: swap;
+}
+
 * {
     margin: 0;
     padding: 0;
+}
+
+:root {
+    --primary: #FFFBEF;
+    --font-family: 'Gotham Pro';
 }
 
 body {
@@ -11,6 +44,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    font-family: var(--font-family);
 }
 
 body::before {
@@ -43,4 +77,49 @@ body::before {
     to {
         transform: translateY(calc(100vh + 20px)) translateX(var(--wind));
     }
+}
+
+header {
+    position: relative;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 80px;
+    background: rgba(0, 0, 0, 0.591);
+}
+
+.header__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header__nameServer {
+    font-weight: 900;
+    color: #9B9090;
+}
+
+.header__right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-transform: uppercase;
+}
+
+.header__right-block {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #9B9090;
+    font-weight: 900;
+}
+
+.header__right-block--content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #222222;
+    padding: 5px 10px;
+    text-transform: lowercase;
 }
