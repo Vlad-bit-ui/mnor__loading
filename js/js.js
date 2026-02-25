@@ -24,32 +24,8 @@
 //     document.body.appendChild(snowflake);
 // }
 
-async function updatePlayerCount() {
-    const playersEl = document.getElementById("players");
-    const maxPlayersEl = document.querySelector(".maxPlayers");
-    const mapEl = document.getElementById("mapName");
-
-    try {
-        const response = await fetch("http://192.168.0.111:8080/user_monitoring");
-        const data = await response.json();
-
-        if (data.status === "success") {
-            if (playersEl) playersEl.textContent = data.players ?? "-";
-            if (maxPlayersEl) maxPlayersEl.textContent = data.max_players ?? "-";
-            if (mapEl) mapEl.textContent = data.map ?? "-";
-        } else {
-            if (playersEl) playersEl.textContent = "-";
-            if (maxPlayersEl) maxPlayersEl.textContent = "-";
-            if (mapEl) mapEl.textContent = "-";
-        }
-    } catch (error) {
-        if (playersEl) playersEl.textContent = "-";
-        if (maxPlayersEl) maxPlayersEl.textContent = "-";
-        if (mapEl) mapEl.textContent = "-";
-    }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    updatePlayerCount();
-    setInterval(updatePlayerCount, 10000);
-});
+window.GameDetails = function (servername, serverurl, mapname, maxplayers) {
+    document.querySelector('.header__nameServer').textContent = servername;
+    document.getElementById('mapName').textContent = mapname;
+    document.getElementById('players').textContent = maxplayers > 0 ? maxplayers : 0;
+};
