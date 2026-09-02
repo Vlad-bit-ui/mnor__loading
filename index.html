@@ -1,46 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metrostroi NoRank Loading</title>
+    <title>Metrostroi NoRank — Загрузка</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
     <script src="js/js.js" defer></script>
 </head>
 
 <body>
 
-    <header>
-        <div class="header__left">
-            <img src="images/main_logo.png" width="48px">
-            <div class="header__nameServer">Metrostroi NoRank</div>
-        </div>
-        <div class="header__right">
-            <div class="header__right-block">
-                ГРАВЦІ
-                <div class="header__right-block--content">
-                    <div id="players"></div>
-                    <div> / </div>
-                    <div class="maxPlayers"></div>
-                </div>
+    <div class="loading">
+        <header class="loading__header">
+            <div class="loading__brand">
+                <img src="images/main_logo.png" class="loading__logo" alt="logo">
+                <div class="loading__brand-name" id="serverNameDisplay">Metrostroi NoRank</div>
             </div>
 
-            <div class="header__right-block">
-                Мапа
-                <div class="header__right-block--content">
-                    <div id="mapName">gm_metro_kalinin_v3</div>
+            <div class="loading__info">
+                <div class="loading__info-block">
+                    <i class="mdi mdi-account-group"></i>
+                    <div class="loading__info-value">
+                        <span id="currentOnline">-</span>
+                        <span class="loading__info-sep">/</span>
+                        <span id="maxOnline">-</span>
+                    </div>
                 </div>
+
+                <div class="loading__info-block">
+                    <i class="mdi mdi-map-outline"></i>
+                    <div class="loading__info-value" id="mapName">-</div>
+                </div>
+
+                <div class="loading__info-block">
+                    <i class="mdi mdi-gamepad-variant-outline"></i>
+                    <div class="loading__info-value">Sandbox</div>
+                </div>
+            </div>
+        </header>
+
+        <main class="loading__main">
+            <div class="loading__tip">
+                <div class="loading__tip-icon">
+                    <i class="mdi mdi-lightbulb-on-outline"></i>
+                </div>
+                <div class="loading__tip-text" id="tipMessage"></div>
             </div>
 
-            <div class="header__right-block">
-                Режим
-                <div class="header__right-block--content">
-                    <div>Sandbox</div>
+            <div class="loading__progress-card">
+                <div class="loading__progress-status" id="loadStatus">Инициализация</div>
+                <div class="loading__progress-bar">
+                    <div class="loading__progress-bar-fill" id="loadProgressFill"></div>
                 </div>
             </div>
-        </div>
-    </header>
+        </main>
+    </div>
 
 </body>
 
