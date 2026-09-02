@@ -56,9 +56,7 @@ async function fetchServerStatus() {
 
         const data = await response.json();
         renderServerStatus(data);
-    } catch (err) {
-        console.error("Не удалось получить статус сервера", err);
-    }
+    } catch (err) { }
 }
 
 function renderServerStatus(data) {
@@ -95,27 +93,32 @@ function refreshProgress() {
     setProgress(percent);
 }
 
-function SetFilesTotal(total) {
+window.SetFilesTotal = function (total) {
     totalFiles = total;
     refreshProgress();
-}
+};
 
-function SetFilesNeeded(needed) {
+window.SetFilesNeeded = function (needed) {
     neededFiles = needed;
     refreshProgress();
-}
+};
 
-function DownloadingFile(fileName) {
+window.DownloadingFile = function (fileName) {
     setStatus(`Загрузка: ${fileName}`);
-}
+};
 
-function SetStatusChanged(status) {
+window.SetStatusChanged = function (status) {
     setStatus(status);
-    if (status === "Sending Client Info") {
+
+    if (status === "Workshop Complete") {
+        setProgress(50);
+    } else if (status === "Client info sent!") {
+        setProgress(80);
+    } else if (status === "Sending Client Info" || status === "Starting Lua...") {
         setProgress(100);
         setStatus("Инициализация завершена");
     }
-}
+};
 
 document.addEventListener("DOMContentLoaded", () => {
     prepareTips();
