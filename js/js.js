@@ -75,13 +75,8 @@ function renderServerStatus(data) {
     }
 }
 
-const loadMessages = [
-    "Загрузка аддонов",
-    "Загрузка карт"
-];
-
-let currentLoadMessageIndex = 0;
-let downloadedFiles = 0;
+let totalFiles = 0;
+let neededFiles = 0;
 
 function setStatus(text) {
     const statusEl = document.getElementById("loadStatus");
@@ -94,27 +89,31 @@ function setProgress(percent) {
 }
 
 function refreshProgress() {
-    const estimatedTotal = Math.max(downloadedFiles, 20);
-    const percent = Math.min(100, Math.round((downloadedFiles / estimatedTotal) * 100));
+    if (totalFiles <= 0) return;
+    const downloaded = totalFiles - neededFiles;
+    const percent = Math.min(100, Math.max(0, Math.round((downloaded / totalFiles) * 100)));
     setProgress(percent);
 }
 
-function SetStatusChanged(status) {
-    if (status.indexOf("Downloading the addon named : #") !== -1) {
-        downloadedFiles++;
-        refreshProgress();
+function SetFilesTotal(total) {
+    totalFiles = total;
+    refreshProgress();
+}
 
-        if (currentLoadMessageIndex < loadMessages.length) {
-            setStatus(loadMessages[currentLoadMessageIndex]);
-            currentLoadMessageIndex++;
-        } else {
-            setStatus(loadMessages[loadMessages.length - 1]);
-        }
-    } else if (status === "Sending Client Info") {
+function SetFilesNeeded(needed) {
+    neededFiles = needed;
+    refreshProgress();
+}
+
+function DownloadingFile(fileName) {
+    setStatus(`Загрузка: ${fileName}`);
+}
+
+function SetStatusChanged(status) {
+    setStatus(status);
+    if (status === "Sending Client Info") {
         setProgress(100);
         setStatus("Инициализация завершена");
-    } else {
-        setStatus(status);
     }
 }
 
